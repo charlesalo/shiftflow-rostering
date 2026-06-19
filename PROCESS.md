@@ -28,3 +28,19 @@ I picked the **mini-dashboard frame** for two reasons:
   98% audit-ready stat and the Needs Cover status badge put ShiftFlow's
   care-sector positioning — audit-ready records, clear shift status —
   front and center instead of burying it in a features section.
+
+## Fixes
+
+**Social-proof + feature-card styling.** The first pass of the social-proof
+row and feature grid looked unfinished:
+
+- *Social-proof avatars* were faint tinted circles with colored text, so they
+  read as plain initials rather than a stack of people. Replaced them with
+  solid colored circles and white initials (matching the staff badges in the
+  hero roster card), overlapped with `-ml`, and added a light teal tint
+  (`bg-primary/5`) plus top/bottom borders to the band so it no longer floats
+  in isolation.
+- *Feature icons* were bare outline glyphs on a barely-there tint. Gave each a
+  solid colored circle: teal for Smart Scheduling and Conflict Detection, and
+  amber for Compliance-Ready Records — using the audit accent color to tie that
+  card to the compliance theme carried through the rest of the page.
