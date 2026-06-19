@@ -53,3 +53,13 @@ row and feature grid looked unfinished:
 The card is responsibly hidden below 1024px (`hidden lg:block`), and the
 section's `overflow-hidden` clips its intentional desktop peek so it never
 extends the page. No fix was needed — confirmed rather than assumed.
+
+**Anchor links — audited the targets, not just the labels.** The AI scaffolded
+nav and footer with plausible-looking links that didn't all resolve: a
+"Pricing" link pointed to `#pricing` though no pricing section exists, and
+every CTA pointed to `#demo` but no element actually had that id — so "Book a
+Demo" and "Start Free Trial" scrolled nowhere. Caught both by checking where
+the links led rather than trusting that generated hrefs were wired up: removed
+the dead Pricing links and added `id="demo"` (with `scroll-mt-16`) to the final
+CTA so all the demo CTAs land correctly. A reminder that AI output can look
+finished while quietly linking to nothing.

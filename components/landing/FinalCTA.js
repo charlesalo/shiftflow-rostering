@@ -4,7 +4,7 @@ import Card from "@/components/ui/Card";
 
 export default function FinalCTA() {
   return (
-    <section className="relative overflow-hidden bg-accent">
+    <section id="demo" className="relative overflow-hidden bg-accent scroll-mt-16">
       <div className="mx-auto max-w-4xl px-5 py-20 text-center sm:px-6 lg:py-28">
         <h2 className="text-3xl font-bold tracking-tight text-primary-dark sm:text-4xl lg:text-5xl">
           Ready to let the roster run itself?
