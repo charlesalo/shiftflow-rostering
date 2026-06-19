@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* ShiftFlow brand palette — see PROJECT_BRIEF.md */
+  --color-primary: #0f766e; /* deep teal */
+  --color-primary-dark: #134e4a;
+  --color-accent: #f59e0b; /* amber */
+  --color-background: #fafaf9; /* off-white */
+  --color-surface: #ffffff;
+  --color-text: #1e293b; /* slate */
+  --color-text-muted: #64748b; /* muted slate */
+  --color-success: #16a34a;
+  --color-warning: #d97706;
+  --color-danger: #dc2626;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
