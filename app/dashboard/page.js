@@ -1,23 +1,64 @@
-import Link from "next/link";
+"use client";
 
-export default function Dashboard() {
+import { useState } from "react";
+import {
+  STAFF,
+  DAYS,
+  SHIFTS,
+  SHIFT_TYPES,
+  STATUS_META,
+  DEPARTMENTS,
+  ROLES,
+  WEEK_LABEL,
+  getWeekSummary,
+  getStaffById,
+} from "@/lib/roster-data";
+import Sidebar from "@/components/dashboard/Sidebar";
+import TopBar from "@/components/dashboard/TopBar";
+import RosterGrid from "@/components/dashboard/RosterGrid";
+import ShiftDetailPanel from "@/components/dashboard/ShiftDetailPanel";
+
+export default function DashboardPage() {
+  // Lifted here so the grid can set the selection and the panel can read it.
+  const [selectedShiftId, setSelectedShiftId] = useState(null);
+
+  const selectedShift = selectedShiftId
+    ? SHIFTS.find((s) => s.id === selectedShiftId) ?? null
+    : null;
+  const selectedStaff = selectedShift ? getStaffById(selectedShift.staffId) : null;
+  const summary = getWeekSummary();
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center gap-6 px-6 text-center">
-      <span className="rounded-full bg-accent/15 px-4 py-1 text-sm font-medium text-warning">
-        Weekly Roster
-      </span>
-      <h1 className="max-w-2xl text-4xl font-bold tracking-tight text-text sm:text-5xl">
-        Dashboard
-      </h1>
-      <p className="max-w-xl text-lg text-text-muted">
-        Dashboard placeholder — Challenge 2 goes here.
-      </p>
-      <Link
-        href="/"
-        className="rounded-lg border border-primary px-5 py-2.5 font-medium text-primary transition-colors hover:bg-primary/5"
-      >
-        Back to landing
-      </Link>
-    </main>
+    <div className="flex h-screen overflow-hidden bg-background text-text">
+      <Sidebar />
+
+      <div className="flex min-w-0 flex-1 flex-col">
+        <TopBar
+          weekLabel={WEEK_LABEL}
+          departments={DEPARTMENTS}
+          roles={ROLES}
+          summary={summary}
+        />
+
+        <div className="flex min-h-0 flex-1">
+          <main className="min-w-0 flex-1 overflow-auto p-6">
+            <RosterGrid
+              staff={STAFF}
+              days={DAYS}
+              shifts={SHIFTS}
+              shiftTypes={SHIFT_TYPES}
+              selectedShiftId={selectedShiftId}
+              onSelectShift={setSelectedShiftId}
+            />
+          </main>
+
+          <ShiftDetailPanel
+            shift={selectedShift}
+            staff={selectedStaff}
+            statusMeta={STATUS_META}
+          />
+        </div>
+      </div>
+    </div>
   );
 }
