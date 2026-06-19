@@ -44,3 +44,12 @@ row and feature grid looked unfinished:
   solid colored circle: teal for Smart Scheduling and Conflict Detection, and
   amber for Compliance-Ready Records — using the audit accent color to tie that
   card to the compliance theme carried through the rest of the page.
+
+## Testing
+
+**Final CTA peeking stat card — responsive check.** Verified the "Audit-ready
+98% / On track" card that peeks into the final CTA's corner at 360 / 480 / 768
+/ 1280px using headless Chrome — no horizontal overflow or scroll at any width.
+The card is responsibly hidden below 1024px (`hidden lg:block`), and the
+section's `overflow-hidden` clips its intentional desktop peek so it never
+extends the page. No fix was needed — confirmed rather than assumed.
