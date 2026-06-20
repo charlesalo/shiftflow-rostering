@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Badge from "@/components/ui/Badge";
 
 const FAQS = [
   {
@@ -33,9 +32,9 @@ export default function FAQ() {
     <section id="faq" className="scroll-mt-16">
       <div className="mx-auto max-w-3xl px-5 py-20 sm:px-6 lg:py-24">
         <div className="text-center">
-          <Badge tone="primary" size="md" dot>
+          <p className="text-xs font-semibold uppercase tracking-widest text-primary">
             FAQ
-          </Badge>
+          </p>
           <h2 className="mt-5 text-3xl font-bold tracking-tight text-text sm:text-4xl">
             Questions, answered.
           </h2>

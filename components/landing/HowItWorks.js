@@ -1,5 +1,3 @@
-import Badge from "@/components/ui/Badge";
-
 const STEPS = [
   {
     n: 1,
@@ -30,9 +28,9 @@ export default function HowItWorks() {
     >
       <div className="mx-auto max-w-6xl px-5 py-20 sm:px-6 lg:py-24">
         <div className="max-w-2xl">
-          <Badge tone="primary" size="md" dot>
+          <p className="text-xs font-semibold uppercase tracking-widest text-primary">
             How it Works
-          </Badge>
+          </p>
           <h2 className="mt-5 text-3xl font-bold tracking-tight text-text sm:text-4xl">
             From a blank week to review-ready records, in three steps.
           </h2>

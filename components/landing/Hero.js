@@ -134,9 +134,9 @@ export default function Hero() {
       <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-16 sm:px-6 sm:py-20 lg:grid-cols-2 lg:gap-12 lg:py-28">
         {/* Copy */}
         <div className="max-w-xl">
-          <Badge tone="primary" size="md" dot>
+          <p className="rounded-none border-l-2 border-solid border-accent pl-3 text-xs font-semibold uppercase tracking-widest text-primary">
             Built for care providers
-          </Badge>
+          </p>
 
           <h1 className="mt-5 text-4xl font-bold leading-tight tracking-tight text-text sm:text-5xl lg:text-6xl">
             Rostering that runs itself.
