@@ -74,13 +74,13 @@ function ShiftContent({ shift, staff }) {
       </dl>
 
       {/* Actions (static) */}
-      <div className="mt-6 flex gap-2">
+      <div className="mt-6 flex flex-col gap-2">
         <Button
           as="button"
           type="button"
           variant="secondary"
           size="sm"
-          className="flex-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
+          className="w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
         >
           Reassign
         </Button>
@@ -88,7 +88,7 @@ function ShiftContent({ shift, staff }) {
           as="button"
           type="button"
           size="sm"
-          className="flex-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
+          className="w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
           disabled={isConfirmed}
           title={isConfirmed ? "This shift is already confirmed" : undefined}
         >
@@ -116,7 +116,7 @@ export default function ShiftDetailPanel({ shiftId }) {
   return (
     <aside
       ref={panelRef}
-      className="w-full shrink-0 border-t border-slate-200 bg-surface p-4 lg:w-80 lg:overflow-y-auto lg:border-l lg:border-t-0 lg:p-6"
+      className="w-full shrink-0 border-t border-slate-200 bg-surface p-4 lg:w-72 lg:overflow-y-auto lg:border-l lg:border-t-0 lg:p-6"
     >
       <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">
         Shift details
