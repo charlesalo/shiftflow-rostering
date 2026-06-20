@@ -72,14 +72,20 @@ function ShiftContent({ shift, staff }) {
 
       {/* Actions (static) */}
       <div className="mt-6 flex gap-2">
-        <Button as="button" type="button" variant="secondary" size="sm" className="flex-1">
+        <Button
+          as="button"
+          type="button"
+          variant="secondary"
+          size="sm"
+          className="flex-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
+        >
           Reassign
         </Button>
         <Button
           as="button"
           type="button"
           size="sm"
-          className="flex-1"
+          className="flex-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
           disabled={isConfirmed}
           title={isConfirmed ? "This shift is already confirmed" : undefined}
         >
@@ -95,7 +101,7 @@ export default function ShiftDetailPanel({ shiftId }) {
   const staff = shift ? getStaffById(shift.staffId) : null;
 
   return (
-    <aside className="w-80 shrink-0 overflow-auto border-l border-slate-200 bg-surface p-6">
+    <aside className="w-full shrink-0 border-t border-slate-200 bg-surface p-4 md:w-80 md:overflow-y-auto md:border-l md:border-t-0 md:p-6">
       <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">
         Shift details
       </p>

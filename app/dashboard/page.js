@@ -32,8 +32,8 @@ export default function DashboardPage() {
           summary={summary}
         />
 
-        <div className="flex min-h-0 flex-1">
-          <main className="min-w-0 flex-1 overflow-auto p-6">
+        <div className="flex min-h-0 flex-1 flex-col overflow-y-auto md:flex-row md:overflow-y-hidden">
+          <main className="min-w-0 p-4 md:flex-1 md:overflow-y-auto md:p-6">
             <RosterGrid
               staff={STAFF}
               days={DAYS}

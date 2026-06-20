@@ -31,7 +31,7 @@ export default function RosterGrid({
   return (
     <div className="space-y-4">
       <div className="overflow-x-auto rounded-xl border border-slate-200 bg-surface shadow-sm">
-        <div className="grid min-w-[60rem] grid-cols-[13rem_repeat(7,minmax(8.5rem,1fr))]">
+        <div className="grid min-w-[52rem] grid-cols-[10.5rem_repeat(7,minmax(7.5rem,1fr))] md:min-w-[60rem] md:grid-cols-[13rem_repeat(7,minmax(8.5rem,1fr))]">
           {/* Header row */}
           <div className="sticky left-0 top-0 z-30 border-b border-r border-slate-100 bg-surface px-3 py-3 text-xs font-semibold uppercase tracking-wide text-text-muted">
             Staff
@@ -75,7 +75,7 @@ export default function RosterGrid({
                             onClick={() => onSelectShift?.(shift.id)}
                             aria-pressed={isSelected}
                             aria-label={`${person.name}, ${day}, ${type.label} shift, ${shift.status}`}
-                            className={`flex h-full min-h-[3.5rem] w-full flex-col justify-between rounded-lg px-2.5 py-2 text-left transition ${type.block} ${type.text} ${
+                            className={`flex h-full min-h-[3.5rem] w-full flex-col justify-between rounded-lg px-2.5 py-2 text-left transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text focus-visible:ring-offset-2 focus-visible:ring-offset-surface ${type.block} ${type.text} ${
                               isSelected
                                 ? "ring-2 ring-text ring-offset-2 ring-offset-surface"
                                 : ""

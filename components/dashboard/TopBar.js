@@ -51,7 +51,7 @@ export default function TopBar({
   summary = {},
 }) {
   return (
-    <header className="border-b border-slate-200 bg-surface px-6 py-4">
+    <header className="border-b border-slate-200 bg-surface px-4 py-3 md:px-6 md:py-4">
       <div className="flex flex-wrap items-center justify-between gap-4">
         {/* Left — title + week navigation */}
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
@@ -60,7 +60,7 @@ export default function TopBar({
             <button
               type="button"
               aria-label="Previous week"
-              className="grid h-8 w-8 place-items-center rounded-lg text-text-muted transition-colors hover:bg-slate-100 hover:text-text"
+              className="grid h-8 w-8 place-items-center rounded-lg text-text-muted transition-colors hover:bg-slate-100 hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
             >
               <ChevronLeft />
             </button>
@@ -70,7 +70,7 @@ export default function TopBar({
             <button
               type="button"
               aria-label="Next week"
-              className="grid h-8 w-8 place-items-center rounded-lg text-text-muted transition-colors hover:bg-slate-100 hover:text-text"
+              className="grid h-8 w-8 place-items-center rounded-lg text-text-muted transition-colors hover:bg-slate-100 hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
             >
               <ChevronRight />
             </button>
