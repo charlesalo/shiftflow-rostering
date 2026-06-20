@@ -8,19 +8,19 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: "var(--color-primary)",
-          dark: "var(--color-primary-dark)",
+          DEFAULT: "rgb(var(--color-primary) / <alpha-value>)",
+          dark: "rgb(var(--color-primary-dark) / <alpha-value>)",
         },
-        accent: "var(--color-accent)",
-        background: "var(--color-background)",
-        surface: "var(--color-surface)",
+        accent: "rgb(var(--color-accent) / <alpha-value>)",
+        background: "rgb(var(--color-background) / <alpha-value>)",
+        surface: "rgb(var(--color-surface) / <alpha-value>)",
         text: {
-          DEFAULT: "var(--color-text)",
-          muted: "var(--color-text-muted)",
+          DEFAULT: "rgb(var(--color-text) / <alpha-value>)",
+          muted: "rgb(var(--color-text-muted) / <alpha-value>)",
         },
-        success: "var(--color-success)",
-        warning: "var(--color-warning)",
-        danger: "var(--color-danger)",
+        success: "rgb(var(--color-success) / <alpha-value>)",
+        warning: "rgb(var(--color-warning) / <alpha-value>)",
+        danger: "rgb(var(--color-danger) / <alpha-value>)",
       },
       fontFamily: {
         sans: ["var(--font-inter)", "ui-sans-serif", "system-ui", "sans-serif"],
