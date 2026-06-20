@@ -3,6 +3,7 @@ const TONES = {
   primary: { chip: "border border-primary/20 bg-primary/5 text-primary", dot: "bg-accent" },
   success: { chip: "bg-success/10 text-success", dot: "bg-success" },
   warning: { chip: "bg-warning/10 text-warning", dot: "bg-warning" },
+  danger: { chip: "bg-danger/10 text-danger", dot: "bg-danger" },
 };
 
 const SIZES = {
