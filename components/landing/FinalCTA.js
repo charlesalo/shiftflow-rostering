@@ -50,7 +50,7 @@ export default function FinalCTA() {
         {/* Copy */}
         <div className="max-w-xl">
           <h2 className="text-3xl font-bold tracking-tight text-primary-dark sm:text-4xl lg:text-5xl">
-            Ready to let the roster run itself?
+            Ready to let the roster<br className="hidden lg:block" /> run itself?
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-primary-dark/80">
             Start your free trial today and have next week scheduled — clashes
