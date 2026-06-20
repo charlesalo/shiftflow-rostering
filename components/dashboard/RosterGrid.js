@@ -74,6 +74,18 @@ function EmptyCell() {
   );
 }
 
+// A shift is dimmed if it fails any currently active filter; "All ..." /
+// null/falsy values mean that filter isn't active. `role` is the shift's
+// staff member's role, passed in by the caller (already in scope from the
+// staff.map loop, so no extra lookup is needed).
+function shiftMatchesFilters(shift, role, statusFilter, departmentFilter, roleFilter) {
+  const statusOk = !statusFilter || shift.status === statusFilter;
+  const departmentOk =
+    !departmentFilter || departmentFilter === "All departments" || shift.department === departmentFilter;
+  const roleOk = !roleFilter || roleFilter === "All roles" || role === roleFilter;
+  return statusOk && departmentOk && roleOk;
+}
+
 function Legend({ shiftTypes }) {
   return (
     <div className="flex flex-wrap items-center gap-4 text-xs font-medium text-text-muted">
@@ -95,6 +107,8 @@ export default function RosterGrid({
   selectedShiftId,
   onSelectShift,
   statusFilter = null,
+  departmentFilter = null,
+  roleFilter = null,
 }) {
   const [dayIndex, setDayIndex] = useState(0);
   const activeDay = days[dayIndex];
@@ -149,7 +163,9 @@ export default function RosterGrid({
                         shift={shift}
                         type={type}
                         isSelected={shift.id === selectedShiftId}
-                        isDimmed={Boolean(statusFilter) && shift.status !== statusFilter}
+                        isDimmed={
+                          !shiftMatchesFilters(shift, person.role, statusFilter, departmentFilter, roleFilter)
+                        }
                         onSelect={() => onSelectShift?.(shift.id)}
                         ariaLabel={`${person.name}, ${day}, ${type.label} shift, ${shift.status}`}
                       />
@@ -211,7 +227,9 @@ export default function RosterGrid({
                       shift={shift}
                       type={type}
                       isSelected={shift.id === selectedShiftId}
-                      isDimmed={Boolean(statusFilter) && shift.status !== statusFilter}
+                      isDimmed={
+                        !shiftMatchesFilters(shift, person.role, statusFilter, departmentFilter, roleFilter)
+                      }
                       onSelect={() => onSelectShift?.(shift.id)}
                       ariaLabel={`${person.name}, ${activeDay}, ${type.label} shift, ${shift.status}`}
                     />

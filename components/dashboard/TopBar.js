@@ -51,11 +51,13 @@ function ChevronRight() {
   );
 }
 
-function FilterSelect({ label, allLabel, options }) {
+function FilterSelect({ label, allLabel, options, value, onChange }) {
   return (
     <div className="relative">
       <select
         aria-label={label}
+        value={value}
+        onChange={onChange}
         className="cursor-pointer appearance-none rounded-lg border border-slate-300 bg-surface px-3 py-2 pr-8 text-sm text-text transition-colors hover:border-slate-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30"
       >
         <option>{allLabel}</option>
@@ -86,6 +88,10 @@ export default function TopBar({
   summary = {},
   statusFilter = null,
   onStatusFilterChange,
+  departmentFilter = "All departments",
+  onDepartmentFilterChange,
+  roleFilter = "All roles",
+  onRoleFilterChange,
 }) {
   const toggleFilter = (status) => {
     onStatusFilterChange?.(statusFilter === status ? null : status);
@@ -124,8 +130,16 @@ export default function TopBar({
             label="Filter by department"
             allLabel="All departments"
             options={departments}
+            value={departmentFilter}
+            onChange={(e) => onDepartmentFilterChange?.(e.target.value)}
           />
-          <FilterSelect label="Filter by role" allLabel="All roles" options={roles} />
+          <FilterSelect
+            label="Filter by role"
+            allLabel="All roles"
+            options={roles}
+            value={roleFilter}
+            onChange={(e) => onRoleFilterChange?.(e.target.value)}
+          />
           <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-primary text-sm font-semibold text-surface">
             DW
           </span>

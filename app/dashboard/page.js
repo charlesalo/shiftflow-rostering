@@ -20,6 +20,9 @@ export default function DashboardPage() {
   const [selectedShiftId, setSelectedShiftId] = useState(null);
   // Lifted here too: the top bar sets the active status filter, the grid dims non-matching shifts.
   const [statusFilter, setStatusFilter] = useState(null);
+  // Same pattern for the department/role dropdowns — "All ..." means no filter.
+  const [departmentFilter, setDepartmentFilter] = useState("All departments");
+  const [roleFilter, setRoleFilter] = useState("All roles");
   // Lifted here too: the panel's own toggle collapses it, but selecting a shift
   // while collapsed should bring it back so the result is actually visible.
   const [isPanelCollapsed, setIsPanelCollapsed] = useState(false);
@@ -42,6 +45,10 @@ export default function DashboardPage() {
           summary={summary}
           statusFilter={statusFilter}
           onStatusFilterChange={setStatusFilter}
+          departmentFilter={departmentFilter}
+          onDepartmentFilterChange={setDepartmentFilter}
+          roleFilter={roleFilter}
+          onRoleFilterChange={setRoleFilter}
         />
 
         <div className="flex min-h-0 flex-1 flex-col overflow-y-auto lg:flex-row lg:overflow-y-hidden">
@@ -53,6 +60,8 @@ export default function DashboardPage() {
               selectedShiftId={selectedShiftId}
               onSelectShift={handleSelectShift}
               statusFilter={statusFilter}
+              departmentFilter={departmentFilter}
+              roleFilter={roleFilter}
             />
           </main>
 
