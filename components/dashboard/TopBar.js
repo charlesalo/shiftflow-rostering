@@ -1,4 +1,39 @@
-import Badge from "@/components/ui/Badge";
+// Per-status chip styling: a quiet default state and a bolder, ringed active
+// state in the same hue, so the active filter reads clearly at a glance.
+const CHIP_TONES = {
+  success: {
+    base: "bg-success/10 text-success hover:bg-success/15",
+    active: "bg-success/15 text-success ring-2 ring-success/50",
+    dot: "bg-success",
+  },
+  warning: {
+    base: "bg-warning/10 text-warning hover:bg-warning/15",
+    active: "bg-warning/15 text-warning ring-2 ring-warning/50",
+    dot: "bg-warning",
+  },
+  danger: {
+    base: "bg-danger/10 text-danger hover:bg-danger/15",
+    active: "bg-danger/15 text-danger ring-2 ring-danger/50",
+    dot: "bg-danger",
+  },
+};
+
+function StatusChip({ tone, label, count, active, onClick }) {
+  const t = CHIP_TONES[tone];
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-pressed={active}
+      className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface ${
+        active ? t.active : t.base
+      }`}
+    >
+      <span className={`h-1.5 w-1.5 rounded-full ${t.dot}`} aria-hidden="true" />
+      {count} {label}
+    </button>
+  );
+}
 
 function ChevronLeft() {
   return (
@@ -21,7 +56,7 @@ function FilterSelect({ label, allLabel, options }) {
     <div className="relative">
       <select
         aria-label={label}
-        className="cursor-pointer appearance-none rounded-lg border border-slate-200 bg-surface py-1.5 pl-3 pr-8 text-sm text-text transition-colors hover:border-slate-300 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+        className="cursor-pointer appearance-none rounded-lg border border-slate-300 bg-surface px-3 py-2 pr-8 text-sm text-text transition-colors hover:border-slate-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30"
       >
         <option>{allLabel}</option>
         {options.map((opt) => (
@@ -49,7 +84,13 @@ export default function TopBar({
   departments = [],
   roles = [],
   summary = {},
+  statusFilter = null,
+  onStatusFilterChange,
 }) {
+  const toggleFilter = (status) => {
+    onStatusFilterChange?.(statusFilter === status ? null : status);
+  };
+
   return (
     <header className="border-b border-slate-200 bg-surface px-4 py-3 lg:px-6 lg:py-4">
       <div className="flex flex-wrap items-center justify-between gap-4">
@@ -91,17 +132,29 @@ export default function TopBar({
         </div>
       </div>
 
-      {/* Summary chips — the week's compliance signal at a glance */}
+      {/* Summary chips — double as status filters for the grid below */}
       <div className="mt-3 flex flex-wrap items-center gap-2">
-        <Badge tone="success" size="sm" dot>
-          {summary.confirmed} Confirmed
-        </Badge>
-        <Badge tone="warning" size="sm" dot>
-          {summary.pending} Pending
-        </Badge>
-        <Badge tone="danger" size="sm" dot>
-          {summary.needsCover} Needs Cover
-        </Badge>
+        <StatusChip
+          tone="success"
+          label="Confirmed"
+          count={summary.confirmed}
+          active={statusFilter === "Confirmed"}
+          onClick={() => toggleFilter("Confirmed")}
+        />
+        <StatusChip
+          tone="warning"
+          label="Pending"
+          count={summary.pending}
+          active={statusFilter === "Pending"}
+          onClick={() => toggleFilter("Pending")}
+        />
+        <StatusChip
+          tone="danger"
+          label="Needs Cover"
+          count={summary.needsCover}
+          active={statusFilter === "Needs Cover"}
+          onClick={() => toggleFilter("Needs Cover")}
+        />
       </div>
     </header>
   );
