@@ -1,7 +1,61 @@
 import Logo from "@/components/ui/Logo";
 
-// Placeholder sidebar nav — wired up later.
-const NAV = ["Dashboard", "Roster", "Staff", "Messages", "Settings"];
+function DashboardIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="3" y="3" width="7" height="7" rx="1.5" stroke="currentColor" strokeWidth="2" />
+      <rect x="14" y="3" width="7" height="7" rx="1.5" stroke="currentColor" strokeWidth="2" />
+      <rect x="3" y="14" width="7" height="7" rx="1.5" stroke="currentColor" strokeWidth="2" />
+      <rect x="14" y="14" width="7" height="7" rx="1.5" stroke="currentColor" strokeWidth="2" />
+    </svg>
+  );
+}
+
+function RosterIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="3" y="4" width="18" height="17" rx="2" stroke="currentColor" strokeWidth="2" />
+      <path d="M3 9h18M8 2v4M16 2v4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function StaffIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="9" cy="8" r="3" stroke="currentColor" strokeWidth="2" />
+      <path d="M4 19c0-2.76 2.24-5 5-5s5 2.24 5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <path d="M15.5 6.2a3 3 0 0 1 0 5.6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <path d="M17 19c0-2-.86-3.8-2.2-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function MessagesIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M4 5h16v11H9l-5 4V5Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function SettingsIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M4 8h16M4 16h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <rect x="7" y="6" width="4" height="4" rx="1.2" fill="currentColor" />
+      <rect x="13" y="14" width="4" height="4" rx="1.2" fill="currentColor" />
+    </svg>
+  );
+}
+
+const NAV = [
+  { label: "Dashboard", href: "#", icon: DashboardIcon },
+  { label: "Roster", href: "#", icon: RosterIcon, active: true },
+  { label: "Staff", href: "#", icon: StaffIcon },
+  { label: "Messages", href: "#", icon: MessagesIcon },
+  { label: "Settings", href: "#", icon: SettingsIcon },
+];
 
 export default function Sidebar() {
   return (
@@ -10,21 +64,34 @@ export default function Sidebar() {
         <Logo />
       </div>
 
-      <nav className="flex-1 space-y-1 px-3 py-4">
-        {NAV.map((item, i) => (
-          <span
-            key={item}
-            className={`block rounded-lg px-3 py-2 text-sm font-medium ${
-              i === 0 ? "bg-primary/10 text-primary" : "text-text-muted"
+      <nav aria-label="Dashboard" className="flex-1 space-y-1 px-3 py-4">
+        {NAV.map(({ label, href, icon: Icon, active }) => (
+          <a
+            key={label}
+            href={href}
+            aria-current={active ? "page" : undefined}
+            className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+              active
+                ? "bg-primary/5 text-primary"
+                : "text-text-muted hover:bg-slate-100 hover:text-text"
             }`}
           >
-            {item}
-          </span>
+            <Icon />
+            {label}
+          </a>
         ))}
       </nav>
 
-      <div className="border-t border-slate-100 px-5 py-4 text-xs text-text-muted">
-        Sidebar — placeholder
+      <div className="border-t border-slate-100 p-4">
+        <div className="flex items-center gap-3">
+          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-primary text-xs font-semibold text-surface">
+            DW
+          </span>
+          <div className="min-w-0">
+            <p className="truncate text-sm font-semibold text-text">Dana Whitlock</p>
+            <p className="truncate text-xs text-text-muted">Roster Manager</p>
+          </div>
+        </div>
       </div>
     </aside>
   );
