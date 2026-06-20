@@ -64,7 +64,7 @@ export default function FAQ() {
                       viewBox="0 0 24 24"
                       fill="none"
                       aria-hidden="true"
-                      className={`shrink-0 text-text-muted transition-transform duration-200 ${
+                      className={`shrink-0 text-text-muted transition-transform duration-300 ease-in-out ${
                         isOpen ? "rotate-180" : ""
                       }`}
                     >
@@ -78,18 +78,20 @@ export default function FAQ() {
                     </svg>
                   </button>
                 </h3>
-                {isOpen && (
-                  <div
-                    id={`faq-panel-${i}`}
-                    role="region"
-                    aria-labelledby={`faq-trigger-${i}`}
-                    className="pb-5"
-                  >
-                    <p className="max-w-prose text-sm leading-relaxed text-text-muted">
+                <div
+                  id={`faq-panel-${i}`}
+                  role="region"
+                  aria-labelledby={`faq-trigger-${i}`}
+                  className={`grid overflow-hidden transition-[grid-template-rows] duration-300 ease-in-out ${
+                    isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                  }`}
+                >
+                  <div className="min-h-0 overflow-hidden">
+                    <p className="max-w-prose pb-5 text-sm leading-relaxed text-text-muted">
                       {item.a}
                     </p>
                   </div>
-                )}
+                </div>
               </div>
             );
           })}
