@@ -63,14 +63,14 @@ const FOCUS =
 
 export default function Sidebar() {
   return (
-    <aside className="flex h-screen w-16 shrink-0 flex-col border-r border-slate-200 bg-surface md:w-60">
+    <aside className="flex h-screen w-16 shrink-0 flex-col border-r border-slate-200 bg-surface lg:w-60">
       {/* Logo — full wordmark at md+, mark only on the rail */}
-      <div className="flex items-center justify-center border-b border-slate-100 px-2 py-5 md:justify-start md:px-5">
-        <Logo className="hidden md:flex" />
+      <div className="flex items-center justify-center border-b border-slate-100 px-2 py-5 lg:justify-start lg:px-5">
+        <Logo className="hidden lg:flex" />
         <Link
           href="/"
           aria-label="ShiftFlow home"
-          className={`grid h-8 w-8 place-items-center rounded-lg bg-primary text-surface md:hidden ${FOCUS}`}
+          className={`grid h-8 w-8 place-items-center rounded-lg bg-primary text-surface lg:hidden ${FOCUS}`}
         >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <rect x="3" y="5" width="13" height="4" rx="2" fill="currentColor" />
@@ -79,31 +79,31 @@ export default function Sidebar() {
         </Link>
       </div>
 
-      <nav aria-label="Dashboard" className="flex-1 space-y-1 px-2 py-4 md:px-3">
+      <nav aria-label="Dashboard" className="flex-1 space-y-1 px-2 py-4 lg:px-3">
         {NAV.map(({ label, href, icon: Icon, active }) => (
           <a
             key={label}
             href={href}
             aria-label={label}
             aria-current={active ? "page" : undefined}
-            className={`flex items-center justify-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors md:justify-start ${FOCUS} ${
+            className={`flex items-center justify-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors lg:justify-start ${FOCUS} ${
               active
                 ? "bg-primary/5 text-primary"
                 : "text-text-muted hover:bg-slate-100 hover:text-text"
             }`}
           >
             <Icon />
-            <span className="hidden md:inline">{label}</span>
+            <span className="hidden lg:inline">{label}</span>
           </a>
         ))}
       </nav>
 
-      <div className="border-t border-slate-100 p-3 md:p-4">
-        <div className="flex items-center justify-center gap-3 md:justify-start">
+      <div className="border-t border-slate-100 p-3 lg:p-4">
+        <div className="flex items-center justify-center gap-3 lg:justify-start">
           <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-primary text-xs font-semibold text-surface">
             DW
           </span>
-          <div className="hidden min-w-0 md:block">
+          <div className="hidden min-w-0 lg:block">
             <p className="truncate text-sm font-semibold text-text">Dana Whitlock</p>
             <p className="truncate text-xs text-text-muted">Roster Manager</p>
           </div>

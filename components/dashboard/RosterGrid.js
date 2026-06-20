@@ -31,7 +31,7 @@ export default function RosterGrid({
   return (
     <div className="space-y-4">
       <div className="overflow-x-auto rounded-xl border border-slate-200 bg-surface shadow-sm">
-        <div className="grid min-w-[52rem] grid-cols-[10.5rem_repeat(7,minmax(7.5rem,1fr))] md:min-w-[60rem] md:grid-cols-[13rem_repeat(7,minmax(8.5rem,1fr))]">
+        <div className="grid min-w-[52rem] grid-cols-[10.5rem_repeat(7,minmax(7.5rem,1fr))] lg:min-w-[60rem] lg:grid-cols-[13rem_repeat(7,minmax(8.5rem,1fr))]">
           {/* Header row */}
           <div className="sticky left-0 top-0 z-30 border-b border-r border-slate-100 bg-surface px-3 py-3 text-xs font-semibold uppercase tracking-wide text-text-muted">
             Staff

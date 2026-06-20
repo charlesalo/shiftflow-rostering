@@ -51,7 +51,7 @@ export default function TopBar({
   summary = {},
 }) {
   return (
-    <header className="border-b border-slate-200 bg-surface px-4 py-3 md:px-6 md:py-4">
+    <header className="border-b border-slate-200 bg-surface px-4 py-3 lg:px-6 lg:py-4">
       <div className="flex flex-wrap items-center justify-between gap-4">
         {/* Left — title + week navigation */}
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2">

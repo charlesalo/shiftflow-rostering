@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import { SHIFTS, SHIFT_TYPES, STATUS_META, getStaffById } from "@/lib/roster-data";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
@@ -99,9 +102,22 @@ function ShiftContent({ shift, staff }) {
 export default function ShiftDetailPanel({ shiftId }) {
   const shift = shiftId ? SHIFTS.find((s) => s.id === shiftId) ?? null : null;
   const staff = shift ? getStaffById(shift.staffId) : null;
+  const panelRef = useRef(null);
+
+  // Below lg the panel sits below the grid; bring it into view on selection so
+  // the user sees it update instead of having to scroll down. Above lg the
+  // panel is already beside the grid, so leave the scroll position alone.
+  useEffect(() => {
+    if (!shiftId) return;
+    if (window.matchMedia("(min-width: 1024px)").matches) return;
+    panelRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [shiftId]);
 
   return (
-    <aside className="w-full shrink-0 border-t border-slate-200 bg-surface p-4 md:w-80 md:overflow-y-auto md:border-l md:border-t-0 md:p-6">
+    <aside
+      ref={panelRef}
+      className="w-full shrink-0 border-t border-slate-200 bg-surface p-4 lg:w-80 lg:overflow-y-auto lg:border-l lg:border-t-0 lg:p-6"
+    >
       <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">
         Shift details
       </p>
