@@ -1,65 +1,48 @@
-# PROCESS
+# Process
 
-Working notes on how ShiftFlow was built — tools, workflow, and the key
-decisions made along the way.
+## Tools
 
-## Design variations
+Claude (chat) for planning, design review, and copy; Claude Code for
+implementation. I worked section-by-section — Claude Code scaffolded one
+component at a time from a written brief, I reviewed every diff, then
+edited by hand (copy, spacing, bug fixes) before committing.
 
-**Hero floating card cluster.** I tried three layouts for the hero's
-preview cards before committing:
+## Workflow
 
-1. **Mini-dashboard frame** *(chosen)* — a large "Weekly Roster" grid card
-   (staff names down the left, Mon–Sun across the top, colored shift blocks)
-   anchoring two small cards that float at its corners: a compliance stat
-   (98% audit-ready) and a shift status (Needs Cover).
-2. **Diagonal cascade** — three full cards (compliance stat, shift detail,
-   status) stair-stepped down and to the right with minimal rotation. Calm
-   and restrained, but read more like a generic "product screenshot."
-3. **Scattered overlap** — the same cards overlapping at different rotations
-   with z-index depth. The most energetic option, but busier and the
-   fussiest to keep clean across breakpoints.
+Both challenges followed the same loop: write or pick exact mock data
+first (`lib/roster-data.js`), prompt one section, review the diff in the
+browser, fix anything off, commit, repeat. For the landing page this gave
+~20 small commits instead of one mega-prompt. For the dashboard, prompts
+were sequenced by layout piece (shell → sidebar → top bar → grid → detail
+panel → responsiveness), each independently testable before the next.
 
-I picked the **mini-dashboard frame** for two reasons:
+## What AI got right vs. what I fixed
 
-- **It doubles as a preview of the Challenge 2 dashboard.** The hero card is
-  essentially a miniature of the weekly roster screen, so the landing page
-  and the dashboard read as one product rather than two separate builds.
-- **It surfaces the compliance/audit angle right in the hero.** The
-  98% audit-ready stat and the Needs Cover status badge put ShiftFlow's
-  care-sector positioning — audit-ready records, clear shift status —
-  front and center instead of burying it in a features section.
+Claude Code scaffolded clean, accessible markup quickly — ARIA attributes
+on the mobile nav and FAQ accordion, focus trapping in the login modal,
+and shift-type lookups in the roster grid were all solid first passes. The
+biggest thing I caught: the color tokens were defined as bare CSS
+variables (`--color-primary: #0f766e`), which compiles fine for solid
+colors but silently drops every Tailwind opacity utility (`bg-primary/85`).
+This made the hero's and roster grid's morning shifts render invisible — a
+bug that wasn't obvious from the diff, only from testing in-browser. I
+diagnosed it by compiling the Tailwind classes in isolation, then
+refactored the tokens to RGB-channel format (`15 118 110`) so alpha
+modifiers work everywhere. I also rejected an early AI suggestion to clone
+the reference's exact "numbered list + live preview" interaction for both
+Features and How It Works — too close to the reference, and it made two
+sections look identical.
 
-## Fixes
+## Biggest decision I made, not AI
 
-**Social-proof + feature-card styling.** The first pass of the social-proof
-row and feature grid looked unfinished:
+Designing the hero's floating cards and the dashboard's shift colors as one
+shared visual language (`SHIFT_TYPES` in `lib/roster-data.js`), so the
+landing page's preview and the actual dashboard read as one product instead
+of two unrelated builds.
 
-- *Social-proof avatars* were faint tinted circles with colored text, so they
-  read as plain initials rather than a stack of people. Replaced them with
-  solid colored circles and white initials (matching the staff badges in the
-  hero roster card), overlapped with `-ml`, and added a light teal tint
-  (`bg-primary/5`) plus top/bottom borders to the band so it no longer floats
-  in isolation.
-- *Feature icons* were bare outline glyphs on a barely-there tint. Gave each a
-  solid colored circle: teal for Smart Scheduling and Conflict Detection, and
-  amber for Compliance-Ready Records — using the audit accent color to tie that
-  card to the compliance theme carried through the rest of the page.
+## With another day
 
-## Testing
-
-**Final CTA peeking stat card — responsive check.** Verified the "Audit-ready
-98% / On track" card that peeks into the final CTA's corner at 360 / 480 / 768
-/ 1280px using headless Chrome — no horizontal overflow or scroll at any width.
-The card is responsibly hidden below 1024px (`hidden lg:block`), and the
-section's `overflow-hidden` clips its intentional desktop peek so it never
-extends the page. No fix was needed — confirmed rather than assumed.
-
-**Anchor links — audited the targets, not just the labels.** The AI scaffolded
-nav and footer with plausible-looking links that didn't all resolve: a
-"Pricing" link pointed to `#pricing` though no pricing section exists, and
-every CTA pointed to `#demo` but no element actually had that id — so "Book a
-Demo" and "Start Free Trial" scrolled nowhere. Caught both by checking where
-the links led rather than trusting that generated hrefs were wired up: removed
-the dead Pricing links and added `id="demo"` (with `scroll-mt-16`) to the final
-CTA so all the demo CTAs land correctly. A reminder that AI output can look
-finished while quietly linking to nothing.
+I'd build out the dashboard's other sidebar destinations (Staff, an
+overview Home with charts, Settings) into real screens rather than inert
+nav items, add client-side validation to the login modal, and let the
+filters narrow the grid rather than only highlight matches.

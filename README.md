@@ -1,80 +1,64 @@
-# ShiftFlow
+# ShiftFlow — VCCG Web Developer Assessment
 
-Shift-rostering for hospitals, clinics, and care providers — schedule staff,
-detect shift conflicts, and keep shift records audit-ready.
+ShiftFlow is a fictional shift-rostering SaaS for hospitals, clinics, and
+care providers — built for the VCCG Web Developer practical assessment.
+Two deliverables, one product:
 
-> _Rostering that runs itself._
+- **Landing page** (`/`) — marketing site for the rostering platform
+- **Dashboard** (`/dashboard`) — the weekly roster, the product itself
 
-This repo holds two routes that share one brand:
+## Live links
 
-- `/` — marketing landing page (Challenge 1)
-- `/dashboard` — weekly rostering dashboard (Challenge 2)
-
-Both are placeholder pages at this stage; the scaffold, Tailwind setup, and
-brand palette are wired up and confirmed working.
+- Landing: https://shiftflow-rostering.vercel.app/
+- Dashboard: https://shiftflow-rostering.vercel.app/dashboard
 
 ## Stack
 
-- **Next.js 14** (App Router)
-- **React 18**
-- **Tailwind CSS 3** (with PostCSS + Autoprefixer)
-- Deploy target: **Vercel**
+- Next.js 14 (App Router), plain JavaScript
+- Tailwind CSS
+- Deployed on Vercel
 
-The brand palette from `PROJECT_BRIEF.md` lives as CSS variables in
-`app/globals.css` and is exposed to Tailwind as named colors
-(`primary`, `accent`, `surface`, `text`, `success`, etc.) in
-`tailwind.config.js`.
-
-## Requirements
-
-- Node.js 18.17+ (developed on Node 22)
-- npm 10+
-
-## Setup
+## Running locally
 
 ```bash
 npm install
+npm run dev
 ```
 
-## Run
-
-```bash
-npm run dev      # start the dev server at http://localhost:3000
-```
-
-Other scripts:
-
-```bash
-npm run build    # production build
-npm run start    # serve the production build
-npm run lint     # next lint
-```
+Visit `http://localhost:3000` for the landing page and
+`http://localhost:3000/dashboard` for the roster dashboard.
 
 ## Project structure
 
 ```
 app/
-  layout.js          # root layout, imports globals.css, sets fonts/metadata
-  globals.css        # Tailwind directives + brand palette CSS variables
-  page.js            # / — landing page (placeholder)
-  dashboard/
-    page.js          # /dashboard — dashboard (placeholder)
-tailwind.config.js   # brand colors mapped to the CSS variables
-postcss.config.js
-PROJECT_BRIEF.md     # brand system + build brief
+  page.js                  # / — landing page
+  dashboard/page.js        # /dashboard — weekly roster dashboard
+  globals.css              # design tokens (CSS variables, RGB-channel format)
+  layout.js
+components/
+  landing/                 # Nav, Hero, Features, HowItWorks, StatsBand,
+                           # FAQ, FinalCTA, Footer, SocialProof, LoginModal
+  dashboard/               # Sidebar, TopBar, RosterGrid, ShiftDetailPanel
+  ui/                      # Badge, Button, Card, Logo (shared primitives)
+lib/
+  roster-data.js           # mock staff/shift data + helpers, shared by the
+                           # landing page hero preview and the dashboard
 ```
 
-## Brand palette
+## Features
 
-| Token            | Value     |
-| ---------------- | --------- |
-| Primary (teal)   | `#0F766E` |
-| Primary dark     | `#134E4A` |
-| Accent (amber)   | `#F59E0B` |
-| Background       | `#FAFAF9` |
-| Surface          | `#FFFFFF` |
-| Text             | `#1E293B` |
-| Text muted       | `#64748B` |
-| Success          | `#16A34A` |
-| Warning          | `#D97706` |
-| Danger           | `#DC2626` |
+**Landing page:** sticky responsive nav with mobile menu and a non-functional
+"Log in" link plus an accessible login modal (focus-trapped, closes on
+Escape/backdrop), hero with animated floating UI cards, rotating avatar
+carousel, feature cards with custom micro-illustrations, an alternating
+vertical timeline for "How it Works," a count-up stats band, an FAQ
+accordion, and a final CTA section.
+
+**Dashboard:** weekly roster grid with color-coded shift types and status
+badges, click-to-select shift details in a collapsible side panel,
+clickable status / department / role filters that highlight matching
+shifts, and a single-day view on mobile instead of a cramped full-week
+table.
+
+See `PROCESS.md` for the AI usage write-up.
