@@ -18,6 +18,8 @@ import ShiftDetailPanel from "@/components/dashboard/ShiftDetailPanel";
 export default function DashboardPage() {
   // Lifted here: the grid sets the selection, the panel reads it.
   const [selectedShiftId, setSelectedShiftId] = useState(null);
+  // Lifted here too: the top bar sets the active status filter, the grid dims non-matching shifts.
+  const [statusFilter, setStatusFilter] = useState(null);
   const summary = getWeekSummary();
 
   return (
@@ -30,6 +32,8 @@ export default function DashboardPage() {
           departments={DEPARTMENTS}
           roles={ROLES}
           summary={summary}
+          statusFilter={statusFilter}
+          onStatusFilterChange={setStatusFilter}
         />
 
         <div className="flex min-h-0 flex-1 flex-col overflow-y-auto lg:flex-row lg:overflow-y-hidden">
@@ -40,6 +44,7 @@ export default function DashboardPage() {
               shiftTypes={SHIFT_TYPES}
               selectedShiftId={selectedShiftId}
               onSelectShift={setSelectedShiftId}
+              statusFilter={statusFilter}
             />
           </main>
 
