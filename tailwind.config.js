@@ -32,11 +32,21 @@ module.exports = {
           "0%, 100%": { transform: "translateY(0) rotate(var(--tw-rotate, 0deg))" },
           "50%": { transform: "translateY(-6px) rotate(var(--tw-rotate, 0deg))" },
         },
+        "flip-out": {
+          "0%": { transform: "scale(1) rotateY(0deg)", opacity: "1" },
+          "100%": { transform: "scale(0.5) rotateY(90deg)", opacity: "0" },
+        },
+        "flip-in": {
+          "0%": { transform: "scale(0.5) rotateY(-90deg)", opacity: "0" },
+          "100%": { transform: "scale(1) rotateY(0deg)", opacity: "1" },
+        },
       },
       animation: {
         "float-fast": "float 4s ease-in-out infinite",
         "float-medium": "float 5s ease-in-out infinite",
         "float-slow": "float 6s ease-in-out infinite",
+        "flip-out": "flip-out 225ms ease-in-out forwards",
+        "flip-in": "flip-in 225ms ease-in-out forwards",
       },
     },
   },
