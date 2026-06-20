@@ -4,14 +4,11 @@ import { useState } from "react";
 import {
   STAFF,
   DAYS,
-  SHIFTS,
   SHIFT_TYPES,
-  STATUS_META,
   DEPARTMENTS,
   ROLES,
   WEEK_LABEL,
   getWeekSummary,
-  getStaffById,
 } from "@/lib/roster-data";
 import Sidebar from "@/components/dashboard/Sidebar";
 import TopBar from "@/components/dashboard/TopBar";
@@ -19,13 +16,8 @@ import RosterGrid from "@/components/dashboard/RosterGrid";
 import ShiftDetailPanel from "@/components/dashboard/ShiftDetailPanel";
 
 export default function DashboardPage() {
-  // Lifted here so the grid can set the selection and the panel can read it.
+  // Lifted here: the grid sets the selection, the panel reads it.
   const [selectedShiftId, setSelectedShiftId] = useState(null);
-
-  const selectedShift = selectedShiftId
-    ? SHIFTS.find((s) => s.id === selectedShiftId) ?? null
-    : null;
-  const selectedStaff = selectedShift ? getStaffById(selectedShift.staffId) : null;
   const summary = getWeekSummary();
 
   return (
@@ -45,18 +37,13 @@ export default function DashboardPage() {
             <RosterGrid
               staff={STAFF}
               days={DAYS}
-              shifts={SHIFTS}
               shiftTypes={SHIFT_TYPES}
               selectedShiftId={selectedShiftId}
               onSelectShift={setSelectedShiftId}
             />
           </main>
 
-          <ShiftDetailPanel
-            shift={selectedShift}
-            staff={selectedStaff}
-            statusMeta={STATUS_META}
-          />
+          <ShiftDetailPanel shiftId={selectedShiftId} />
         </div>
       </div>
     </div>
