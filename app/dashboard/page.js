@@ -20,7 +20,15 @@ export default function DashboardPage() {
   const [selectedShiftId, setSelectedShiftId] = useState(null);
   // Lifted here too: the top bar sets the active status filter, the grid dims non-matching shifts.
   const [statusFilter, setStatusFilter] = useState(null);
+  // Lifted here too: the panel's own toggle collapses it, but selecting a shift
+  // while collapsed should bring it back so the result is actually visible.
+  const [isPanelCollapsed, setIsPanelCollapsed] = useState(false);
   const summary = getWeekSummary();
+
+  const handleSelectShift = (id) => {
+    setSelectedShiftId(id);
+    setIsPanelCollapsed(false);
+  };
 
   return (
     <div className="flex h-screen overflow-hidden bg-background text-text">
@@ -43,12 +51,16 @@ export default function DashboardPage() {
               days={DAYS}
               shiftTypes={SHIFT_TYPES}
               selectedShiftId={selectedShiftId}
-              onSelectShift={setSelectedShiftId}
+              onSelectShift={handleSelectShift}
               statusFilter={statusFilter}
             />
           </main>
 
-          <ShiftDetailPanel shiftId={selectedShiftId} />
+          <ShiftDetailPanel
+            shiftId={selectedShiftId}
+            isCollapsed={isPanelCollapsed}
+            onToggleCollapse={() => setIsPanelCollapsed((v) => !v)}
+          />
         </div>
       </div>
     </div>

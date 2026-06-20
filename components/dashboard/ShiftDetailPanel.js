@@ -5,6 +5,18 @@ import { SHIFTS, SHIFT_TYPES, STATUS_META, getStaffById } from "@/lib/roster-dat
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
 
+function CollapseIcon({ collapsed }) {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      {collapsed ? (
+        <path d="M9 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      ) : (
+        <path d="M15 6l-6 6 6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      )}
+    </svg>
+  );
+}
+
 function EmptyState() {
   return (
     <div className="mt-12 flex flex-col items-center text-center">
@@ -99,7 +111,7 @@ function ShiftContent({ shift, staff }) {
   );
 }
 
-export default function ShiftDetailPanel({ shiftId }) {
+export default function ShiftDetailPanel({ shiftId, isCollapsed = false, onToggleCollapse }) {
   const shift = shiftId ? SHIFTS.find((s) => s.id === shiftId) ?? null : null;
   const staff = shift ? getStaffById(shift.staffId) : null;
   const panelRef = useRef(null);
@@ -116,13 +128,29 @@ export default function ShiftDetailPanel({ shiftId }) {
   return (
     <aside
       ref={panelRef}
-      className="w-full shrink-0 border-t border-slate-200 bg-surface p-4 lg:w-72 lg:overflow-y-auto lg:border-l lg:border-t-0 lg:p-6"
+      className={`w-full shrink-0 border-t border-slate-200 bg-surface p-4 lg:overflow-y-auto lg:border-l lg:border-t-0 ${
+        isCollapsed ? "lg:w-12 lg:p-3" : "lg:w-72 lg:p-6"
+      }`}
     >
-      <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">
-        Shift details
-      </p>
+      {/* Collapse toggle — lg+ only; the panel stacks below the grid on
+          smaller screens, so there's no persistent width to reclaim there. */}
+      <button
+        type="button"
+        onClick={onToggleCollapse}
+        aria-label={isCollapsed ? "Show details panel" : "Collapse details panel"}
+        aria-expanded={!isCollapsed}
+        className="hidden h-7 w-7 shrink-0 items-center justify-center rounded-md border border-slate-200 bg-surface text-text-muted shadow-sm transition-colors hover:border-slate-300 hover:bg-slate-100 hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface lg:mb-3 lg:flex"
+      >
+        <CollapseIcon collapsed={isCollapsed} />
+      </button>
 
-      {shift && staff ? <ShiftContent shift={shift} staff={staff} /> : <EmptyState />}
+      <div className={isCollapsed ? "lg:hidden" : ""}>
+        <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">
+          Shift details
+        </p>
+
+        {shift && staff ? <ShiftContent shift={shift} staff={staff} /> : <EmptyState />}
+      </div>
     </aside>
   );
 }

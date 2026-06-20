@@ -63,7 +63,7 @@ const FOCUS =
 
 export default function Sidebar() {
   return (
-    <aside className="flex h-screen w-16 shrink-0 flex-col border-r border-slate-200 bg-surface lg:w-60">
+    <aside className="flex h-screen w-16 shrink-0 flex-col border-r border-slate-200 bg-surface lg:w-52">
       {/* Logo — full wordmark at md+, mark only on the rail */}
       <div className="flex items-center justify-center border-b border-slate-100 px-2 py-5 lg:justify-start lg:px-5">
         <Logo className="hidden lg:flex" />
