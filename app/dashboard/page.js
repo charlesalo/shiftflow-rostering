@@ -25,7 +25,7 @@ export default function DashboardPage() {
   const [roleFilter, setRoleFilter] = useState("All roles");
   // Lifted here too: the panel's own toggle collapses it, but selecting a shift
   // while collapsed should bring it back so the result is actually visible.
-  const [isPanelCollapsed, setIsPanelCollapsed] = useState(false);
+  const [isPanelCollapsed, setIsPanelCollapsed] = useState(true);
   const summary = getWeekSummary();
 
   const handleSelectShift = (id) => {
