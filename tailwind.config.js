@@ -25,6 +25,19 @@ module.exports = {
       fontFamily: {
         sans: ["var(--font-inter)", "ui-sans-serif", "system-ui", "sans-serif"],
       },
+      keyframes: {
+        float: {
+          // Preserve any existing rotation set via Tailwind's rotate-* utilities
+          // (--tw-rotate) so floating cards that are also tilted don't snap flat.
+          "0%, 100%": { transform: "translateY(0) rotate(var(--tw-rotate, 0deg))" },
+          "50%": { transform: "translateY(-6px) rotate(var(--tw-rotate, 0deg))" },
+        },
+      },
+      animation: {
+        "float-fast": "float 4s ease-in-out infinite",
+        "float-medium": "float 5s ease-in-out infinite",
+        "float-slow": "float 6s ease-in-out infinite",
+      },
     },
   },
   plugins: [],

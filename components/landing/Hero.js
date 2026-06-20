@@ -158,10 +158,10 @@ export default function Hero() {
 
         {/* Mini-dashboard frame: roster grid anchor + two corner pills */}
         <div className="relative mx-auto flex w-full max-w-md flex-col gap-4 lg:block lg:max-w-none">
-          <RosterCard className="relative lg:z-10" />
+          <RosterCard className="relative lg:z-10 motion-safe:animate-float-fast" />
           <div className="flex gap-3 lg:contents">
-            <ComplianceCard className="flex-1 lg:absolute lg:-bottom-5 lg:left-4 lg:z-20 lg:w-40 lg:-rotate-2" />
-            <StatusCard className="flex-1 lg:absolute lg:-bottom-6 lg:right-2 lg:z-20 lg:w-48 lg:rotate-2" />
+            <ComplianceCard className="flex-1 lg:absolute lg:-bottom-5 lg:left-4 lg:z-20 lg:w-40 lg:-rotate-2 motion-safe:animate-float-medium motion-safe:[animation-delay:0.3s]" />
+            <StatusCard className="flex-1 lg:absolute lg:-bottom-6 lg:right-2 lg:z-20 lg:w-48 lg:rotate-2 motion-safe:animate-float-slow motion-safe:[animation-delay:0.6s]" />
           </div>
         </div>
       </div>
