@@ -90,7 +90,7 @@ function RosterCard({ className = "" }) {
   );
 }
 
-function ComplianceCard({ className = "" }) {
+export function ComplianceCard({ className = "" }) {
   return (
     <Card className={`rounded-xl p-4 ${className}`}>
       <p className="text-xs font-medium text-text-muted">Audit-ready this week</p>
@@ -103,7 +103,7 @@ function ComplianceCard({ className = "" }) {
   );
 }
 
-function StatusCard({ className = "" }) {
+export function StatusCard({ className = "" }) {
   return (
     <Card className={`rounded-xl p-4 ${className}`}>
       <div className="flex items-center gap-2">
